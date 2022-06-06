@@ -23,7 +23,15 @@ foreach($listAkun as $format) {
 
     $AkunLion = explode("|", $format);
     $nomorHP1 = $AkunLion[0];
-    $nomorHP  = substr_replace($nomorHP1,'+62',0,1);
+    if(!preg_match('/[^+0-9]/',trim($nomorHP1))){
+        if (substr(trim($nomorHP1), 0, 3) == '+62'){
+            $nomorHP = trim($nomorHP1);
+        } else if (substr(trim($nomorHP1), 0, 1) == '0'){
+            $nomorHP = '+62'.substr(trim($nomorHP1), 1);
+        } else {
+            $nomorHP = '+62'.trim($nomorHP1);
+        }
+    }
     $password = $AkunLion[1];
 
     echo "[ ".date("H:i:s")." ] [".$no."/".count($listAkun)."] ".$colors->getColoredString($format, "green");
