@@ -1,7 +1,5 @@
 <?php
-$a = '081227919053';
-$b = substr_replace($a,'+62',0,1);
-echo $b.PHP_EOL;
+
 error_reporting(0);
 date_default_timezone_set("Asia/Jakarta");
 
